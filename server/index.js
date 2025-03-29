@@ -7,10 +7,10 @@ const port = process.env.PORT || 4000;
 
 // MiddleWare
 const corsOptions = {
-  origin: [],
-  methods: "GET,POST,PUT,DELETE",
   Credential: true,
   optionSuccessStatus: 200,
+  // methods: "GET,POST,PUT,DELETE",
+  // origin: [],
 };
 app.use(express.json());
 app.use(cors(corsOptions));

@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import React from "react";
+import { useBooks } from "../context/BookContext";
+import Hero from "../components/Hero";
 
 const Home = () => {
-  const [books, setBooks] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:4000/books`)
-      .then((res) => res.json())
-      .then((data) => setBooks(data));
-  }, []);
+  const { books, currentBook, loading, error } = useBooks();
   console.log(books);
   return (
     <div>
-      <h2 className="bg-red-50">Home</h2>
+      <Hero />
     </div>
   );
 };

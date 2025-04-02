@@ -1,8 +1,17 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import bookHeroImage from "../assets/banner.webp";
 import { FaSearch } from "react-icons/fa";
+import { useBooks } from "../context/BookContext";
 
 const Hero = () => {
+  const { books, filters, updateFilters } = useBooks();
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateFilters({ search: searchInput.trim(), page: 1 });
+  };
   return (
     <div className="bg-gray-900 min-h-[600px] relative overflow-hidden">
       <div className="container mx-auto px-4 py-36 flex flex-col lg:flex-row gap-6 md:gap-10 items-center justify-between'">
@@ -15,9 +24,11 @@ const Hero = () => {
             haven for book lovers
           </h1>
           {/* Search bar */}
-          <form className="mt-8 relative max-w-xl">
+          <form onSubmit={handleSubmit} className="mt-8 relative max-w-xl">
             <div className="relative md:w-[70%] w-full">
               <input
+                onChange={(e) => setSearchInput(e.target.value)}
+                value={searchInput}
                 type="text"
                 placeholder="Enter title"
                 className="w-full px-6 py-4 pl-12 rounded-full bg-gray-800 text-white border 

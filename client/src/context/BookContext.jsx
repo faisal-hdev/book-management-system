@@ -1,20 +1,21 @@
-/* eslint-disable no-prototype-builtins */
 /* eslint-disable react-refresh/only-export-components */
+/* eslint-disable no-prototype-builtins */
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 import axios from "axios";
+import { backendBaseUrl } from "../../utils/baseURL";
 
 const BookContext = createContext();
 
 export const BookProvider = ({ children }) => {
-  const [books, setBooks] = useState([]);
   const [currentBook, setCurrentBook] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [books, setBooks] = useState([]);
 
   const [filters, setFilters] = useState({
     page: 1,
-    limit: 10,
+    limit: 8,
     genre: "",
     minYear: "",
     maxYear: "",
@@ -44,7 +45,7 @@ export const BookProvider = ({ children }) => {
         }
       });
 
-      const response = await axios.get(`http://localhost:4000/books?${params}`);
+      const response = await axios.get(`${backendBaseUrl}/books?${params}`);
       setBooks(response.data.books);
       setPagination({
         currentPage: response.data.currentPage,
@@ -75,7 +76,7 @@ export const BookProvider = ({ children }) => {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get(`http://localhost:4000/book/${bookId}`);
+      const response = await axios.get(`${backendBaseUrl}/book/${bookId}`);
       setCurrentBook(response.data);
       return response.data;
     } catch (error) {

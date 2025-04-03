@@ -6,14 +6,9 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = process.env.PORT || 4000;
 
 // MiddleWare
-const corsOptions = {
-  Credential: true,
-  optionSuccessStatus: 200,
-  // methods: "GET,POST,PUT,DELETE",
-  // origin: [],
-};
+// const corsOptions = {};
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Connect MongoDB
 const uri = process.env.MONGODB_URL;
@@ -173,7 +168,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Book management server is running");
+  res.send("BooksManagement server is running");
 });
 
 app.listen(port, () => {

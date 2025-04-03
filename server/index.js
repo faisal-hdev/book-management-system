@@ -13,6 +13,7 @@ const corsOptions = {
 };
 app.use(express.json());
 app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: true }));
 
 // Connect MongoDB
 const uri = process.env.MONGODB_URL;

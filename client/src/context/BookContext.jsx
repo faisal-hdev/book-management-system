@@ -49,8 +49,8 @@ export const BookProvider = ({ children }) => {
       setBooks(response.data.books);
       setPagination({
         currentPage: response.data.currentPage,
-        totalBooks: response.data.totalBooks,
         totalPages: response.data.totalPages,
+        totalBooks: response.data.totalBooks,
       });
     } catch (error) {
       console.log(error);
